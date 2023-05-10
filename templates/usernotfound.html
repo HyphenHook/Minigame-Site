@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<title> User not found </title>
+<!-- Error page for user not being found -->
+<div class="errorCont d-flex justify-content-center align-items-center">
+  <div class="errorMsg container shadow border rounded p-4 text-center">
+    <h1>User not found</h1>
+    <img class="err-logo" src="{{ url_for('static', filename='asset/sadgadget.svg') }}" alt="SVG Image">
+    
+    <div class="d-grid">
+    <button class="btn btn-primary" onclick="location.href='{{ url_for('home') }}'">Go Home</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<title> Lil Gadge's Choice </title>
+<!-- Little gadge chooses page -->
+<h1 class ="makeadecision text-center"> Little Gadge Chooses </h1>
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="mb-3 text-center mt-3 rounded shadow border px-5 py-5">
+      <!-- Container for the actual CONTENT -->
+        <img class="auth-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" >
+        <div class = "pick-container mt-3">
+            <p class="text-center"> Enter options below, separated by commas: </p>
+            <input type = "text" class="rounded border" id = "options">
+            <button id = "pick-button" class="border rounded"> Pick an Option </button>
+            <h2 class="mt-2">Little Gadge selected:</h2>
+            <div class="container rounded border pb-3">
+              <h3 class="stat-icon" id="result"></h3>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/littlegadgechooses.js') }}"></script>
+{% endblock %}

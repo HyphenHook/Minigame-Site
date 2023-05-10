@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Searching for user page -->
+<title>Searching for User</title>
+<!-- Form to post search request to server -->
+<form class="search-con container text-center shadow border rounded pb-3" action=' {{ url_for('search') }}' method="POST">
+  <img class="user-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG" >
+  <h1>SEARCH FOR USER</h1>
+  <!-- error message flash if exists -->
+  {% with messages = get_flashed_messages(with_categories = True) %}
+  {% if messages %}
+    {% if errExist %}
+    <div class="errCon d-flex align-items-center container border rounded mb-3">
+      <i class="fa-solid fa-circle-exclamation pe-3 errIcon"></i>
+      <div>
+        {% for message in messages %}
+         {{ message[1] }}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endif %}
+{% endwith %}
+    <!-- Submitting search -->
+  <input class="form-control me-2" type="search" name="search" placeholder="Search for user">
+  <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+{% endblock %}

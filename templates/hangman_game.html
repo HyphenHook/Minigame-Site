@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<title> Hangman </title>
+<!-- Hangman game room -->
+<h1 class = "hang-man pb-3 text-center"> Hangman </h1>
+<div class="d-flex justify-content-center align-items-center">
+<div class="mt-auto mb-auto">
+<div class = "con">
+    <div id = "options-container"></div>
+    <div id = "letter-container" class = "letter-container hide"></div>
+    <div id = "user-input-section"></div>
+    <canvas id = "canvas" class="rounded shadow"></canvas>
+    <div id = "new-game-container" class = "new-game-popup position-absolute hide">
+      <div id = "result-text"></div>
+      <button id = "win-button" class="hide" onclick="location.href='{{ url_for('game1_win') }}'">+{{ earning }} <i class="fa-solid fa-coins fa-bounce"></i> Woohoo! </button>
+      <button id ="lose-button" class="hide" onclick="location.href='{{ url_for('game1_lose') }}'"> Awh! </button>
+    </div>
+</div>
+</div>
+</div>
+<script src="{{ url_for('static', filename='js/hangman.js') }}"></script>
+{% endblock %}

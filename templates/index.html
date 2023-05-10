@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<!--main page-->
+<title> Lil Gadgets </title>
+  <div id="hero-carousel" class="carousel slide h-100 w-100" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <!--slide 1-->
+      <div class="carousel-item active c-item">
+        <div class = "full-dark-bg"></div>
+        <div class="carousel-caption top-0 mt-4">
+          <p class="mt-5 fs-3 text-uppercase"> Set a New Highscore </p>
+          <h1 class="display-1 fw-bolder text-capitalize"> Hangman </h1>
+          <a href = "{{ url_for('game1') }}">
+          <button class="btn btn-primary px-4 py-2 fs-5 mt-5"> Play the Game </button>
+          </a>
+          <img src = "{{ url_for('static', filename='asset/hangman.svg') }}">
+        </div>
+      </div>
+      <!--slide 2-->
+      <div class="carousel-item c-item">
+        <div class="full-dark-bg"></div>
+        <div class="carousel-caption top-0 mt-4">
+          <p class="text-uppercase fs-3 mt-5"> Set a New Highscore</p>
+          <p class="display-1 fw-bolder text-capitalize"> Tic Tac Toe </p>
+          <a href = "{{ url_for('game2') }}">
+          <button class="btn btn-primary px-4 py-2 fs-5 mt-5" > Play the Game </button>
+          </a>
+          <img src = "{{ url_for('static', filename='asset/tictactoe.svg') }}">
+      </div>
+      </div>
+      <!--slide 3-->
+      <div class="carousel-item c-item">
+        <div class = "full-dark-bg"></div>
+        <div class="carousel-caption top-0 mt-4">
+          <p class="text-uppercase fs-3 mt-5"> Set a New Highscore </p>
+          <p class="display-1 fw-bolder text-capitalize"> Memory Game </p>
+          <a href = "{{ url_for('game3') }}">
+          <button class="btn btn-primary px-4 py-2 fs-5 mt-5"> Play the Game</button>
+          </a>
+          <img src = "{{ url_for('static', filename='asset/memory game.svg') }}">
+        </div>
+      </div>
+    </div>
+    <!--previous slide-->
+    <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <!--next slide-->
+    <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+{% endblock %}

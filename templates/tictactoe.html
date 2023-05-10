@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<!--tic tac toe page-->
+<title> New Tic Tac Toe </title>
+<h1 class = "hang-man pb-3 text-center"> New Tic Tac Toe Session </h1>
+<div class="d-flex justify-content-center align-items-center">
+  <form class="hangman-con container shadow border rounded text-center pb-3" action='{{ url_for('game2') }}' method="POST">
+    <div class="row">
+      <h3><img class="auth-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" > Choose the Difficulty </h3>
+    </div>
+    <!--error message flash-->
+    {% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+      {% if errExist %}
+      <div class="errCon d-flex align-items-center container border rounded mb-3">
+        <i class="fa-solid fa-circle-exclamation pe-3 errIcon"></i>
+        <div>
+          {% for message in messages %}
+           {{ message[1] }}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
+    {% endwith %}
+    <!--difficulty selector-->
+    <div class="row">
+      <h5> <i class="fa-solid fa-circle easy"></i> DIFFICULTY <i class="fa-solid fa-circle easy"></i> </h5>
+      <select class="custom-select difficulty-selector rounded shadow border ms-auto me-auto" name="difficulty">
+        <option value="easy" selected>Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+    <div class="col d-grid">
+      <div>
+        <!--finish game screen-->
+      <h5>Winning games at </h5>
+      <h5 class="difficulty-replacer easy"> Easy </h5>
+      <h5> awards </h5>
+      <h5 class="difficulty-awards cleader"> 2 </h5>
+      <h5><i class="fa-solid fa-coins"></i></h5>
+      </div>
+      <button class="btn btn-primary mt-2" type="submit">
+      {% if session["user"] %}
+        -1 <i class="fa-solid fa-coins fa-bounce"></i> CREATE SESSION
+      {% else %}
+        Go Login
+      {% endif %}
+    </button>
+    </div>
+  </form>
+</div>
+<script src="{{ url_for('static', filename='js/tictactoe_menu.js') }}"></script>
+{% endblock %}

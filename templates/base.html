@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <!--bootstrap css library-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap/css/bootstrap.min.css') }}">
+  <!--montserrat-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <!--jquery for javascript library-->
+  <script src="{{ url_for('static', filename='Bootstrap/js/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename='Bootstrap/js/popper.min.js') }}"></script>
+  <!--bootstrap javascript library-->
+  <script src="{{ url_for('static', filename='Bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!--font awesome css library for icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css"/>
+  <!--css file-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!--monomaniac-->
+  <link href="https://fonts.cdnfonts.com/css/monomaniac-one" rel="stylesheet">
+  <!--website favicon-->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='asset/favicon.ico') }}">
+</head>
+
+<body>
+  <!--navigation bar-->
+  <nav class="navbar navbar-expand-lg navbar-inverse">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('home')}}"> 
+      <!--logo and website name-->
+      <span class="logo-sector">
+        <img class="site-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" >
+        <span>Little Gadgets</span>
+      </span>
+    </a>
+    <div class="navbar-header">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav">
+        <!--dropdown menu for games-->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id = "navbarDropdown" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">
+            <i class="fa fa-gamepad baractive" aria-hidden="true"></i>
+            <i class="fa fa-gamepad fa-beat-fade barinactive" aria-hidden="true"></i> GAMES </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{{ url_for('game1') }}"> Hangman </a></li>
+            <li><a class="dropdown-item" href="{{ url_for('game2') }}"> Tic Tac Toe </a></li>
+            <li><a class="dropdown-item" href="{{ url_for('game3') }}"> Memory Game </a></li>
+          </ul>
+        </li>
+        <!--dropdown menu for rng-->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id = "navbarDropdown" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">
+            <i class="fa-solid fa-dice baractive"></i>
+            <i class="fa-solid fa-dice fa-beat-fade barinactive"></i> RNG </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ url_for('rng1') }}"> Roll a Dice </a></li>
+              <li><a class="dropdown-item" href="{{ url_for('rng2') }}"> Little Gadge Chooses </a></li>
+            </ul>
+          </li>
+        <li class="nav-item bar-opt">
+          <a class="nav-link" href="{{ url_for('leaderboard') }}">
+            <i class="fa-solid fa-trophy baractive"></i>
+            <i class="fa-solid fa-trophy fa-beat-fade barinactive" aria-hidden="true"></i> LEADERBOARD </a></li>
+
+        <li class="nav-item bar-opt">
+          <a class="nav-link" href="{{ url_for('search') }}">
+            <i class="fa-solid fa-magnifying-glass baractive"></i>
+            <i class="fa-solid fa-magnifying-glass fa-beat-fade barinactive" aria-hidden="true"></i> SEARCH </a></li>
+      </ul>
+      <ul class="nav navbar-nav ms-auto">
+        <!--checking if user is logged in-->
+        {% if curr_user %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('id_stats', id=session['user']) }}">
+              <i class="fas fa-id-badge baractive"></i>
+              <i class="fas fa-id-badge fa-beat-fade barinactive"></i>
+              {{ curr_user.username|truncate(10, True, '...') }} 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" disabled>
+            <i class="fa-solid fa-coins baractive"></i>
+            <i class="fa-solid fa-coins fa-bounce barinactive"></i>
+            <span class="alter_coin"> {{ curr_user.coins }} </span> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">
+              <i class="fa-solid fa-person-walking-arrow-right baractive"></i>
+              <i class="fa-solid fa-person-walking-arrow-right fa-beat-fade barinactive"></i> Logout </a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}">
+              <i class="fa fa-user baractive" aria-hidden="true"></i>
+              <i class="fa fa-user fa-beat-fade barinactive" aria-hidden="true"></i> Sign Up </a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">
+              <i class="fa fa-sign-in baractive"></i>
+              <i class="fa fa-sign-in fa-beat-fade barinactive"></i>  Login </a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  </nav>
+{% block content %}
+{% endblock %}
+  
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+  
+</html>

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Profile page for a specific user -->
+<title>User: {{ display.username }} </title> <!-- display is fetched from flask on load -->
+<div class="user-con container text-center shadow border rounded">
+  <img class="user-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG" >
+  <h1>User:</h1>
+  <div class="user-stat-con container border rounded mb-3 pb-2">
+    <!-- user's name -->
+    <h1><i class="fa-solid fa-arrow-right"></i> {{ display.username }} <i class="fa-solid fa-arrow-left"></i></h1>
+    <div class="row">
+      <h3><i class="fa-solid fa-arrow-right"></i> General Stats <i class="fa-solid fa-arrow-left"></i></h3>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- coin amount -->
+          <i class="stat-icon fa-solid fa-coins me-2"></i>
+          <i class="stat-icon-i fa-solid fa-coins fa-bounce me-2"></i>
+           Coins 
+        </h4>
+        <h4 class="stat-icon">{{ display.coins }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.coins }}</h4>
+      </div>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- games played amount -->
+          <i class="stat-icon fa-solid fa-gamepad me-2"></i>
+          <i class="stat-icon-i fa-solid fa-gamepad fa-spin me-2"></i>
+          Games Played 
+        </h4>
+        <h4 class="stat-icon">{{ display.games_played }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.games_played }}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <h3><i class="fa-solid fa-arrow-right"></i> Game Stat <i class="fa-solid fa-arrow-left"></i></h3>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- games won amount -->
+          <i class="stat-icon fa-solid fa-medal me-2"></i>
+          <i class="stat-icon-i fa-solid fa-medal fa-fade me-2"></i>
+           Games Won 
+        </h4>
+        <h4 class="stat-icon">{{ display.games_won }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.games_won }}</h4>
+      </div>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- winrate percentage -->
+          <i class="stat-icon fa-solid fa-percent me-2"></i>
+          <i class="stat-icon-i fa-solid fa-percent fa-fade me-2"></i>
+           Winrate 
+        </h4>
+        <h4 class="stat-icon">{{ display.winrate }}%</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.winrate }}%</h4>
+      </div>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- games lost -->
+          <i class="stat-icon fa-solid fa-heart-crack me-2"></i>
+          <i class="stat-icon-i fa-solid fa-heart-crack fa-fade me-2"></i>
+           Games Lost 
+        </h4>
+        <h4 class="stat-icon">{{ display.games_lost }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.games_lost }}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <h3><i class="fa-solid fa-arrow-right"></i> Highest Winstreaks <i class="fa-solid fa-arrow-left"></i></h3>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- hangman streak -->
+          <i class="stat-icon fa-solid fa-person me-2"></i>
+          <i class="stat-icon-i fa-solid fa-person fa-fade me-2"></i>
+           Hangman
+        </h4>
+        <h4 class="stat-icon">{{ display.hang_streak }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.hang_streak }}</h4>
+      </div>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- tic tac toe streak -->
+          <i class="stat-icon fa-solid fa-o me-2"></i>
+          <i class="stat-icon-i fa-solid fa-o fa-fade me-2"></i>
+           Tic Tac Toe
+        </h4>
+        <h4 class="stat-icon">{{ display.tic_streak }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.tic_streak }}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <h3><i class="fa-solid fa-arrow-right"></i> Wins <i class="fa-solid fa-arrow-left"></i></h3>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- hangman wins -->
+          <i class="stat-icon fa-solid fa-person me-2"></i>
+          <i class="stat-icon-i fa-solid fa-person fa-fade me-2"></i>
+           Hangman
+        </h4>
+        <h4 class="stat-icon">{{ display.hang_win }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.hang_win }}</h4>
+      </div>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- tic tac toe wins -->
+          <i class="stat-icon fa-solid fa-o me-2"></i>
+          <i class="stat-icon-i fa-solid fa-o fa-fade me-2"></i>
+           Tic Tac Toe 
+        </h4>
+        <h4 class="stat-icon">{{ display.tic_win }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.tic_win }}</h4>
+      </div>
+      <div class="stat-chunk col border rounded m-1 pt-1 bg-light-subtle">
+        <h4> 
+          <!-- highest memory -->
+          <i class="stat-icon fa-solid fa-face-smile me-2"></i>
+          <i class="stat-icon-i fa-solid fa-face-smile fa-fade me-2"></i>
+           Highest Memory 
+        </h4>
+        <h4 class="stat-icon">{{ display.highest_mem }}</h4>
+        <h4 class="stat-icon-i fa-fade">{{ display.highest_mem }}</h4>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

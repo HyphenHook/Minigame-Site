@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<title> Tic Tac Toe </title>
+<h1 class = "tic-tac-toe text-center"> Tic Tac Toe </h1>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="con-tic shadow border rounded pb-4">
+
+    <!--tic tac toe starting screen-->
+    <div class="start game-block container border rounded shadow">
+      <div class="start-game-stuff d-flex flex-column h-100">
+        <h3 class="text-center mt-2"><img class="auth-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" > Start Game </h3>
+        <h4>Objective:</h4>
+        <div class="container-fluid mx-1">
+          Try to beat the AI at Tic Tac Toe! If you manage to tie, you will only get half the coins promised! Goooood Luck!</div>
+          <!--difficulty selector-->
+        <div class="container-fluid text-center stat-icon fs-3">
+        DIFFICULTY: <span class="difficultyMo">{{ difficulty[0]|upper}}{{difficulty[1:] }}</span> 
+        </div>
+        <div class="container-fluid text-center fs-3">
+          You are going: <span class="placePlacement"></span> 
+          </div>
+        <div class="mt-auto mb-2 w-100">
+          <!--play button-->
+        <button type="button" class="btn btn-primary w-100"id="start-game"> PLAY </button>
+        </div>
+      </div>
+      <!--end game screen-->
+      <div class="end-game-stuff d-flex flex-column h-100 hide">
+        <h3 class="text-center mt-2"><img class="auth-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" > You've <span class="status-end"></span> </h3>
+        <h4 class="text-center"> Your current winstreak is: </h4>
+        <div class="container-fluid text-center stat-icon fs-3 mb-2">
+        <i class="fa-solid fa-fire"></i> <span id="streak">{{ winstreak }}</span> <i class="fa-solid fa-fire"></i>
+        </div>
+        <h4 class="text-center"> You earned: </h4>
+        <div class="container-fluid text-center stat-icon fs-3 mb-2">
+          <i class="fa-solid fa-coins fa-bounce"></i> <span class="earning">{{ pay }}</span> <i class="fa-solid fa-coins fa-bounce"></i>
+        </div>
+        <button class="claim-btn btn btn-primary mt-auto mb-2"> Proceed </button>
+      </div>
+    </div>
+    <div class = "display">
+        <span class = "display-player">Player</span>'s turn
+    </div>
+    <!--game board-->
+    <div class = "board">
+        <div class ="game-overlay hide"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+        <div class = "tile"></div>
+    </div>
+    <div class = "display announcer hide"></div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/tictactoe.js') }}"></script>
+{% endblock %}

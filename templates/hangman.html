@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<title> New Hangman </title>
+<!-- Hangman starting new game room -->
+<h1 class = "hang-man pb-3 text-center"> New Hangman Session </h1>
+<div class="d-flex justify-content-center align-items-center">
+  <form class="hangman-con container shadow border rounded text-center pb-3" action='{{ url_for('game1') }}' method="POST">
+    <div class="row">
+      <h3><img class="auth-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" > Choose the Difficulty </h3>
+    </div>
+    <!-- Error message flash -->
+    {% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+      {% if errExist %}
+      <div class="errCon d-flex align-items-center container border rounded mb-3">
+        <i class="fa-solid fa-circle-exclamation pe-3 errIcon"></i>
+        <div>
+          {% for message in messages %}
+           {{ message[1] }}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
+  {% endwith %}
+  <!-- Hangman difficulty and category selectors -->
+    <div class="row">
+      <div class="col">
+        <h5><i class="cate fa-solid easy fa-apple-whole"></i> CATEGORY <i class="cate fa-solid easy fa-apple-whole"></i></h5>
+        <select class="custom-select category-selector rounded shadow border" name="category">
+          <option value="fruit" selected>Fruit</option>
+          <option value="animal">Animal</option>
+          <option value="country">Country</option>
+          <option value="vegetable">Vegetable</option>
+          <option value="color">Color</option>
+        </select>
+      </div>
+      <div class="col">
+        <h5> <i class="fa-solid fa-circle easy"></i> DIFFICULTY <i class="fa-solid fa-circle easy"></i> </h5>
+        <select class="custom-select difficulty-selector rounded shadow border" name="difficulty">
+          <option value="easy" selected>Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+    </div>
+    <div class="col d-grid">
+      <div>
+      <h5>Winning games at </h5>
+      <h5 class="difficulty-replacer easy"> Easy </h5>
+      <h5> awards </h5>
+      <h5 class="difficulty-awards cleader"> 2 </h5>
+      <h5><i class="fa-solid fa-coins"></i></h5>
+      </div>
+      <button class="btn btn-primary mt-2" type="submit">
+      <!-- Jinja checking if user is logged -->
+      {% if session["user"] %}
+        -1 <i class="fa-solid fa-coins fa-bounce"></i> CREATE SESSION
+      {% else %}
+        Go Login
+      {% endif %}
+    </button>
+    </div>
+  </form>
+</div>
+<script src="{{ url_for('static', filename='js/hangman_menu.js') }}"></script>
+{% endblock %}

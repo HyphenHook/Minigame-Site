@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<title> Roll Da Dice </title>
+<h1 class = "roll-dice text-center"> Roll a Dice </h1>
+<div class="d-flex m-5 justify-content-center align-items-center">
+  <div class="mt-auto mb-auto">
+    <div class = "d-flex flex-column contain shadow rounded border py-4">
+      <div class="row">
+        <div class="col">
+          <div class = "dice">
+            <!--dice faces-->
+            <div class = "face front"></div>
+            <div class = "face back"></div>
+            <div class = "face top"></div>
+            <div class = "face bottom"></div>
+            <div class = "face right"></div>
+            <div class = "face left"></div>
+          </div>
+        </div>
+        <div class="col hide">
+          <div class = "dice">
+            <!--dice faces-->
+            <div class = "face front"></div>
+            <div class = "face back"></div>
+            <div class = "face top"></div>
+            <div class = "face bottom"></div>
+            <div class = "face right"></div>
+            <div class = "face left"></div>
+          </div>
+        </div>
+        <div class="col hide">
+          <div class = "dice">
+            <!--dice faces-->
+            <div class = "face front"></div>
+            <div class = "face back"></div>
+            <div class = "face top"></div>
+            <div class = "face bottom"></div>
+            <div class = "face right"></div>
+            <div class = "face left"></div>
+          </div>
+        </div>
+      </div>
+      <div class="container mb-auto mt-4 text-center">
+        <!--number that states the number on the dices -->
+        <h3 class="rngNum stat-icon w-100 rounded border">???</h3>
+        <!--number of dices selector-->
+        <h4># Dice Selector</h4>
+        <select class="form-select mb-2 text-center dice-selector">
+          <option value="1" active>One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <!--roll dice button-->
+        <button class = "roll border rounded"> Roll Dice </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/rolladice.js') }}"></script>
+{% endblock %}

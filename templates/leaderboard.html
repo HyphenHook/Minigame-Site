@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% block content %}
+<title> Leaderboard </title>
+<!-- Leaderboard page -->
+<h1 class="text-center">Leaderboards</h1>
+<!-- Carousel for each of the leaderboard categories -->
+<div class="board-con container text-center shadow border rounded pb-3 carousel slide" id="leaderboard-carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <!-- Coin leaderboard -->
+      <h3><i class="fa-solid fa-coins"></i>
+         MOST COINS 
+         <i class="fa-solid fa-coins"></i>
+        </h3>
+        <div class="display_leader container">
+          {% for item in display.coins %}
+            {% if loop.index0 == 0 %} <!-- first place -->
+              <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.id) }}">
+                <div class="container text-start firstplace d-flex justify-content-between">
+                  <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                  <div>{{ item.username|truncate(22, True, '...') }}</div>
+                  <div>{{ item.coins }}</div>
+                </div>
+              </a>
+            {% elif loop.index0 == 1 %} <!-- second place -->
+              <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.id) }}">
+                <div class="container text-start secondplace d-flex justify-content-between">
+                  <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                  <div>{{ item.username|truncate(22, True, '...') }}</div>
+                  <div>{{ item.coins }}</div>
+                </div>
+              </a>
+            {% elif loop.index0 == 2 %} <!-- third place -->
+              <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.id) }}">
+                <div class="container text-start thirdplace d-flex justify-content-between">
+                  <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                  <div>{{ item.username|truncate(22, True, '...') }}</div>
+                  <div>{{ item.coins }}</div>
+                </div>
+              </a>
+            {% else %} <!-- all other place -->
+              <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.id) }}">
+                <div class="container text-start d-flex justify-content-between">
+                  <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                  <div>{{ item.username|truncate(22, True, '...') }}</div>
+                  <div>{{ item.coins }}</div>
+                </div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+    </div>
+    <!-- Most games played leaderboard  -->
+    <div class="carousel-item">
+      <h3><i class="stat-icon fa-solid fa-gamepad me-2"></i>
+        MOST GAMES PLAYED 
+        <i class="stat-icon fa-solid fa-gamepad me-2"></i>
+      </h3>
+      <div class="display_leader container">
+        {% for item, total_sum in display.games_played %}
+          {% if loop.index0 == 0 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start firstplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ total_sum }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 1 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start secondplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ total_sum }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 2 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start thirdplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ total_sum }}</div>
+              </div>
+            </a>
+          {% else %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start d-flex justify-content-between">
+                <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ total_sum }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Most games won leaderboard -->
+    <div class="carousel-item">
+      <h3><i class="stat-icon fa-solid fa-medal me-2"></i>
+        MOST GAMES WON 
+        <i class="stat-icon fa-solid fa-medal me-2"></i>
+      </h3>
+      <div class="display_leader container">
+        {% for item in display.games_won %}
+          {% if loop.index0 == 0 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start firstplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.games_won }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 1 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start secondplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.games_won }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 2 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start thirdplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.games_won }}</div>
+              </div>
+            </a>
+          {% else %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start d-flex justify-content-between">
+                <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.games_won }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <!-- highest hangman winstreak leaderboard -->
+    <div class="carousel-item">
+      <h3><i class="stat-icon fa-solid fa-person me-2"></i> HIGHEST HANGMAN STREAK <i class="stat-icon fa-solid fa-person me-2"></i></h3>
+      <div class="display_leader container">
+        {% for item in display.hang_streak %}
+          {% if loop.index0 == 0 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start firstplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_hang_streak }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 1 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start secondplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_hang_streak }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 2 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start thirdplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_hang_streak }}</div>
+              </div>
+            </a>
+          {% else %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start d-flex justify-content-between">
+                <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_hang_streak }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Highest tic tac toe streak leaderboard -->
+    <div class="carousel-item">
+      <h3><i class="stat-icon fa-solid fa-o me-2"></i> HIGHEST TIC TAC TOE STREAK <i class="stat-icon fa-solid fa-o me-2"></i></h3>
+      <div class="display_leader container">
+        {% for item in display.tic_streak %}
+          {% if loop.index0 == 0 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start firstplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_tic_streak }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 1 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start secondplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_tic_streak }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 2 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start thirdplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_tic_streak }}</div>
+              </div>
+            </a>
+          {% else %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start d-flex justify-content-between">
+                <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_tic_streak }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Most hangman wins leaderboard -->
+    <div class="carousel-item">
+      <h3><i class="stat-icon fa-solid fa-person me-2"></i> MOST HANGMAN WINS <i class="stat-icon fa-solid fa-person me-2"></i></h3>
+      <div class="display_leader container">
+        {% for item in display.hang_win %}
+          {% if loop.index0 == 0 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start firstplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.hang_win }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 1 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start secondplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.hang_win }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 2 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start thirdplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} 1</i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.hang_win }}</div>
+              </div>
+            </a>
+          {% else %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start d-flex justify-content-between">
+                <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.hang_win }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Most tic tac toe wins leaderboard -->
+    <div class="carousel-item">
+      <h3><i class="stat-icon fa-solid fa-o me-2"></i> MOST TIC TAC TOE WINS <i class="stat-icon fa-solid fa-o me-2"></i></h3>
+      <div class="display_leader container">
+        {% for item in display.tic_win %}
+          {% if loop.index0 == 0 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start firstplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.tic_win }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 1 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start secondplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.tic_win }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 2 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start thirdplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.tic_win }}</div>
+              </div>
+            </a>
+          {% else %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start d-flex justify-content-between">
+                <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.tic_win }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Highest memory game levels leaderboard -->
+    <div class="carousel-item">
+      <h3><i class="stat-icon fa-solid fa-face-smile me-2"></i> HIGHEST MEMORY GAME <i class="stat-icon fa-solid fa-face-smile me-2"></i></h3>
+      <div class="display_leader container">
+        {% for item in display.highest_mem %}
+          {% if loop.index0 == 0 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start firstplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_mem }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 1 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start secondplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_mem }}</div>
+              </div>
+            </a>
+          {% elif loop.index0 == 2 %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start thirdplace d-flex justify-content-between">
+                <i class="fa-solid fa-medal mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_mem }}</div>
+              </div>
+            </a>
+          {% else %}
+            <a class="nav-link leader-pos border rounded mb-1" href="{{ url_for('id_stats', id=item.user.id) }}">
+              <div class="container text-start d-flex justify-content-between">
+                <i class="fa-solid fa-award mt-1"> {{ loop.index }} </i>
+                <div>{{ item.user.username|truncate(22, True, '...') }}</div>
+                <div>{{ item.highest_mem }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- button for move left and right -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#leaderboard-carousel" data-bs-slide="prev">
+    <span class="cleader fa-solid fa-arrow-left" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#leaderboard-carousel" data-bs-slide="next">
+    <span class="cleader fa-solid fa-arrow-right" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Memory game session room page -->
+<title> Memory Game </title>
+<h1 class = "text-center"> Memory Game </h1>
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <div id = "mem-board" class="border rounded shadow d-flex flex-wrap justify-content-center align-items-center py-3 px-2">
+    <div class="start game-block container border rounded shadow">
+      <div class="start-game-stuff d-flex flex-column h-100">
+        <!-- start screen -->
+        <h3 class="text-center mt-2"><img class="auth-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" > Start Game </h3>
+        <h4>Objective:</h4>
+        <div class="container-fluid mx-1">
+          Repeat the shown sequence to increase your level! This game isn't counted towards winrate percentage! Try not to get any wrong and aim to break your old record of:</div>
+        <div class="container-fluid text-center stat-icon fs-3">
+        <i class="fa-solid fa-trophy"></i> Level 
+        {% if session["user"] %}
+          {{ highscore }} 
+        {% else %}
+          ??? 
+        {% endif %}
+        <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div class="mt-auto mb-2 w-100">
+          <!-- error message incase user can't afford entry fee -->
+          <div class="errCon d-flex align-items-center container border rounded mb-3 hide">
+            <i class="fa-solid fa-circle-exclamation pe-3 errIcon"></i>
+            <div class="errMessage">
+            </div>
+          </div>
+        <!-- jinja to differentiate if user logged in -->
+        <button type="button" class="btn btn-primary w-100"
+          {% if session["user"] %}
+          id="start-game">-1 <i class="fa-solid fa-coins fa-bounce"></i> PLAY
+          {% else %}
+          onclick="location.href='{{ url_for('login') }}'">Go Login
+          {% endif %}
+        </button>
+      </div>
+      </div>
+      <!-- end screen -->
+      <div class="end-game-stuff d-flex flex-column h-100 hide">
+        <h3 class="text-center mt-2"><img class="auth-logo" src="{{ url_for('static', filename='asset/littlegadget.svg') }}" alt="SVG Image" > Woohoo! </h3>
+        <h4 class="text-center"> Your achieved: </h4>
+        <div class="container-fluid text-center stat-icon fs-3 mb-2">
+          <i class="fa-solid fa-trophy"></i> Level <span class="level">1</span> <i class="fa-solid fa-trophy"></i>
+        </div>
+        <h4 class="text-center"> Your highest level is: </h4>
+        <div class="container-fluid text-center stat-icon fs-3 mb-2">
+        <i class="fa-solid fa-trophy"></i> Level <span id="high-level">0</span> <i class="fa-solid fa-trophy"></i>
+        </div>
+        <h4 class="text-center"> You earned: </h4>
+        <div class="container-fluid text-center stat-icon fs-3 mb-2">
+          <i class="fa-solid fa-coins fa-bounce"></i> <span class="earning">0</span> <i class="fa-solid fa-coins fa-bounce"></i>
+        </div>
+        <!-- redirect to main game -->
+        <button onclick="location.href='{{ url_for('game3') }}'" class="claim-btn btn btn-primary mt-auto mb-2"> CLAIM +<span class="earning">??</span> <i class="fa-solid fa-coins fa-bounce"></i></button>
+        
+      </div>
+    </div>
+    <div class="row">
+    <h4>Level <span class="level">1</span> </h4>
+    </div>
+    <div class="box-shot">
+      <div class="game-overlay"></div>
+      <div class="row d-flex justify-content-center align-items-center">
+        <!-- using jinja to create 3x3 boxes -->
+        {% for i in range(1, 4) %}
+        <div class="row d-flex justify-content-center align-items-center">
+          {% for j in range(1, 4) %}
+            <button class = "square border rounded"></button>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/memorygame.js') }}"></script>
+{% endblock %}
